@@ -3,12 +3,14 @@ This sample demonstrates two ways of working with views in ms-sql. The same appr
 
 ## Overview
 The sample has two persistent entities 
+
 * [Department](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/global/src/com/company/mssqlview/entity/Department.java) 
 * [Employee](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/global/src/com/company/mssqlview/entity/Employee.java)
 
 Each employee belongs to some department.
 
 There are two views declared in the database and 2 corresponding non-persistent entities: 
+
 1. The [AvgHourlyRate](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/global/src/com/company/mssqlview/entity/AvgHourlyRate.java) entity mapped to the _avg_hourly_rate_ DB view - shows the average hourly rate between all employees in the department
 ..* Mapping works through the standard CUBA mechanism
 ..* The only restriction of the approach is that the view must have id field
