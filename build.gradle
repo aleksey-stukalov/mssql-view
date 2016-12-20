@@ -40,6 +40,9 @@ cuba {
     tomcat {
         dir = "$project.rootDir/build/tomcat"
     }
+    ide {
+        vcs = 'Git'
+    }
 }
 
 def mssql = 'net.sourceforge.jtds:jtds:1.2.4'
