@@ -10,10 +10,17 @@ import com.haulmont.cuba.core.entity.AbstractNotPersistentEntity;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.gui.data.impl.CustomCollectionDatasource;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
 
 /**
- * Created by aleksey on 19/12/2016.
+ * Custom datasource, that builds t-sql query, based on the {@link javax.persistence.Table} annotation
+ * of an entity and transfers the result to the list of non-persistent entities.
+ *
+ * The datasource implementation supports paging and sort on the DB side.
+ *
+ * @param <T> Type of a non-persistent entity
  */
 public class TsqlQueryDatasource<T extends AbstractNotPersistentEntity> extends CustomCollectionDatasource<T, UUID> {
 
