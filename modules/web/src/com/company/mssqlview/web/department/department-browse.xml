@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.mssqlview.web.department.DepartmentBrowse"
+        focusComponent="departmentsTable"
+        lookupComponent="departmentsTable"
+        messagesPack="com.company.mssqlview.web.department">
+    <dsContext>
+        <collectionDatasource id="departmentsDs"
+                              class="com.company.mssqlview.entity.Department"
+                              view="_local">
+            <query>
+                <![CDATA[select e from mssqlview$Department e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="departmentsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="departmentsTable"
+                datasource="departmentsDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="departmentsTable"
+               width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="phoneNumber"/>
+            </columns>
+            <rows datasource="departmentsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="departmentsTable.create"/>
+                <button id="editBtn"
+                        action="departmentsTable.edit"/>
+                <button id="removeBtn"
+                        action="departmentsTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

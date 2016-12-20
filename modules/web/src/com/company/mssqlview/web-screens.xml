@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <include file="com/company/mssqlview/screens.xml"/>
+    <screen id="mssqlview$Employee.browse"
+            template="com/company/mssqlview/web/employee/employee-browse.xml"/>
+    <screen id="mssqlview$Department.browse"
+            template="com/company/mssqlview/web/department/department-browse.xml"/>
+    <screen id="mssqlview$Department.edit"
+            template="com/company/mssqlview/web/department/department-edit.xml"/>
+    <screen id="mssqlview$AvgHourlyRate.browse"
+            template="com/company/mssqlview/web/avghourlyrate/avg-hourly-rate-browse.xml"/>
+</screen-config>

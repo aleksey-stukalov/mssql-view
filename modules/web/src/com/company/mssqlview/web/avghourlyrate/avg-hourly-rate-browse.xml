@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.mssqlview.web.avghourlyrate.AvgHourlyRateBrowse"
+        focusComponent="avgHourlyRatesTable"
+        lookupComponent="avgHourlyRatesTable"
+        messagesPack="com.company.mssqlview.web.avghourlyrate">
+    <dsContext>
+        <collectionDatasource id="avgHourlyRatesDs"
+                              class="com.company.mssqlview.entity.AvgHourlyRate"
+                              view="_local">
+            <query>
+                <![CDATA[select e from mssqlview$AvgHourlyRate e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="departmentSizesDs"
+                              allowCommit="false"
+                              class="com.company.mssqlview.entity.DepartmentSize"
+                              datasourceClass="com.company.mssqlview.web.datasource.TsqlQueryDatasource"
+                              maxResults="2"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="avgHourlyRatesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="avgHourlyRatesTable"
+                datasource="avgHourlyRatesDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="avgHourlyRatesTable"
+               width="100%">
+            <columns>
+                <column id="name"/>
+                <column id="avgHourlyWage"/>
+            </columns>
+            <rows datasource="avgHourlyRatesDs"/>
+            <rowsCount/>
+        </table>
+        <table height="200px"
+               width="100%">
+            <columns>
+                <column id="name"/>
+                <column id="size"/>
+            </columns>
+            <rows datasource="departmentSizesDs"/>
+            <rowsCount/>
+        </table>
+    </layout>
+</window>
