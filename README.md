@@ -20,7 +20,7 @@ There are two views declared in the database and 2 corresponding entities:
  * Mapping is implemented in the custom [TsqlQueryDatasource](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/web/src/com/company/mssqlview/web/datasource/TsqlQueryDatasource.java) datasource via [QueryServiceBean](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/core/src/com/company/mssqlview/service/QueryServiceBean.java)
  * The datasource supprots paging and sorting on the DB side
  
- ## Using TsqlQueryDatasource
+## Using TsqlQueryDatasource
  
- Define a datasource in your screen (as it is shown [here](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/web/src/com/company/mssqlview/web/avghourlyrate/avg-hourly-rate-browse.xml#L16-L20)) and then you can specify it for any data-aware UI component in CUBA (for example it is shown [here](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/web/src/com/company/mssqlview/web/avghourlyrate/avg-hourly-rate-browse.xml#L40-L48)).
+Define a datasource in your screen (as it is shown [here](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/web/src/com/company/mssqlview/web/avghourlyrate/avg-hourly-rate-browse.xml#L16-L20)) and then you can specify it for any data-aware UI component in CUBA (for example it is shown [here](https://github.com/aleksey-stukalov/mssql-view/blob/master/modules/web/src/com/company/mssqlview/web/avghourlyrate/avg-hourly-rate-browse.xml#L40-L48)).
  
