@@ -1,7 +1,3 @@
-/*
- * TODO Copyright
- */
-
 package com.company.mssqlview.annotation;
 
 import java.lang.annotation.Retention;
