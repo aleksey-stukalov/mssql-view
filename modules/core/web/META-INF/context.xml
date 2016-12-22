@@ -7,7 +7,7 @@
               name="jdbc/CubaDS"
               password="1"
               type="javax.sql.DataSource"
-              url="jdbc:jtds:sqlserver://localhost/mssqlview;instanceName=SQLEXPRESS"
+              url="jdbc:jtds:sqlserver://shiryaeva/mssqlview;instanceName=SQLEXPRESS"
               username="sa"
               validationQuery="select 1"/>
     <!-- Switch off session serialization -->

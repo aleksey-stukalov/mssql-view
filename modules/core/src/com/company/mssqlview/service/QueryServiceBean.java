@@ -36,19 +36,13 @@ public class QueryServiceBean implements QueryService {
     }
 
     @Override
-    public int getCount(String table, String whereClause) {
-        String query = "select count(*) as _count from " + table + (whereClause == null ? "" : " " + whereClause);
+    public int getCount(String countQuery) {
         QueryRunner runner = new QueryRunner(persistence.getDataSource());
         try {
-            Object[] row = runner.query(query, new ArrayHandler());
+            Object[] row = runner.query(countQuery, new ArrayHandler());
             return ((Number) row[0]).intValue();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public int getCount(String table) {
-        return getCount(table, null);
     }
 }

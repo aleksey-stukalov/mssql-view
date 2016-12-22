@@ -4,6 +4,7 @@
 
 package com.company.mssqlview.web.datasource;
 
+import com.company.mssqlview.annotation.EntityQuery;
 import com.company.mssqlview.helper.FieldsMapper;
 import com.company.mssqlview.service.QueryService;
 import com.haulmont.cuba.core.entity.AbstractNotPersistentEntity;
@@ -12,13 +13,16 @@ import com.haulmont.cuba.gui.data.impl.CustomCollectionDatasource;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Custom datasource, that builds t-sql query, based on the {@link javax.persistence.Table} annotation
+ * Custom datasource, that builds t-sql query, based on the {@link EntityQuery} annotation
  * of an entity and transfers the result to the list of non-persistent entities.
  *
- * The datasource implementation supports paging and sort on the DB side.
+ * <b/>Note, that paging and sort on the DB side work ONLY from simple query type (select * from table) is supported!
+ *
+ * <b/>The datasource implementation supports paging and sort on the DB side.
  *
  * @param <T> Type of a non-persistent entity
  */
@@ -33,7 +37,10 @@ public class TsqlQueryDatasource<T extends AbstractNotPersistentEntity> extends 
 
     @Override
     protected Collection<T> getEntities(Map<String, Object> params) {
-        String query = buildQueryBody() + " "
+        String query = buildQueryBody();
+
+        if (isSimpleQuery())
+            query += " "
                 + buildOrderByClause() + " "
                 + buildOffsetClause();
 
@@ -43,15 +50,20 @@ public class TsqlQueryDatasource<T extends AbstractNotPersistentEntity> extends 
 
     @Override
     public int getCount() {
-        return queryService.getCount(getTableName());
+        EntityQuery eq = (EntityQuery) getMetaClass().getJavaClass().getAnnotation(EntityQuery.class);
+        if (Objects.equals(eq.countQuery(), ""))
+            return 0;
+
+        return queryService.getCount(eq.countQuery());
     }
 
-    protected String getTableName() {
-        return FieldsMapper.getTableNameByAnnotation(getMetaClass().getJavaClass());
+    protected boolean isSimpleQuery() {
+        EntityQuery eq = (EntityQuery) getMetaClass().getJavaClass().getAnnotation(EntityQuery.class);
+        return eq.simpleSelectQuery();
     }
 
     protected String buildQueryBody() {
-        return "SELECT * FROM " + getTableName();
+        return FieldsMapper.getQueryByAnnotation(getMetaClass().getJavaClass());
     }
 
     protected String buildOrderByClause() {

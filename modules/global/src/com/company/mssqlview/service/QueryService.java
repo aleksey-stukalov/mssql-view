@@ -19,7 +19,5 @@ public interface QueryService {
      */
     <T extends AbstractNotPersistentEntity> List<T> executeQuery(String query, Class <T> clazz);
 
-    int getCount(String table, String whereClause);
-
-    int getCount(String table);
+    int getCount(String countQuery);
 }

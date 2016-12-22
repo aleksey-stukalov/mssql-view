@@ -4,21 +4,16 @@
 
 package com.company.mssqlview.helper;
 
+import com.company.mssqlview.annotation.EntityQuery;
+import com.company.mssqlview.annotation.QueryField;
 import com.haulmont.cuba.core.entity.AbstractNotPersistentEntity;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.Metadata;
 import org.eclipse.persistence.internal.helper.DatabaseField;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
-
-/**
- * Created by dfgd on 18.12.2016.
- */
-
 
 /**
  * This class provides a number of useful methods to map query result to entity fields
@@ -26,27 +21,27 @@ import java.util.stream.Collectors;
 public class FieldsMapper {
 
     /**
-     * Returns corresponding table name
+     * Returns corresponding query
      * @param clazz class of an entity
-     * @return Name of the table which entity refers to by its {@link Table} annotation
+     * @return Native query which entity refers to by its {@link EntityQuery} annotation
      */
-    public static String getTableNameByAnnotation(Class clazz) {
-        Table annotation = (Table) clazz.getAnnotation(Table.class);
+    public static String getQueryByAnnotation(Class clazz) {
+        EntityQuery annotation = (EntityQuery) clazz.getAnnotation(EntityQuery.class);
         if (annotation == null)
             throw new NullPointerException("Table annotation is not defined for entity " + clazz.getName());
-        return annotation.name();
+        return annotation.query();
     }
 
     /**
      * Returns mapping of map with (columnName, fieldName) entries
-     * </p>Column names are defined by the {@link Column} annotations
+     * </p>Column names are defined by the {@link QueryField} annotations
      * @param clazz class of an entity
      * @return Returns map with (columnName, fieldName) entries
      */
     public static Map<String, String> getColumn2FieldMappingByAnnotation(Class clazz) {
         Map<String, String> result = new HashMap<>();
         for (Field field : clazz.getDeclaredFields()) {
-            Column column = field.getAnnotation(Column.class);
+            QueryField column = field.getAnnotation(QueryField.class);
             if (column != null)
                 result.put(column.name(), field.getName());
         }
@@ -55,7 +50,7 @@ public class FieldsMapper {
 
     /**
      * Returns mapping of map with (fieldName, columnName) entries
-     * </p>Column names are defined by the {@link Column} annotations
+     * </p>Column names are defined by the {@link QueryField} annotations
      * @param clazz class of an entity
      * @return Returns map with (fieldName, columnName) entries
      */
